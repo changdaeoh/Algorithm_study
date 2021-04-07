@@ -68,3 +68,36 @@ class Solution:
         # -------------------------------------------------------------- STEP 5 : tail을 참조하는 head 반환
         # Return the head to the merged linked list (처음값은 None이라서 하나 next한 객체를 반환)
         return merged_head.next
+
+
+
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        merged_head = merged_tail = ListNode(None)
+
+        # While l1 and l2 both have nodes to be traversed
+
+        while l1 and l2:
+            # If the node in l1 has the smaller value
+            if l1.val <= l2.val:
+                # Add the node from l1 to the merged linked list
+                merged_tail.next = l1
+                # Move to the next node in l1
+                l1 = l1.next
+            # If the node in l2 has the smaller value
+            else:
+                # Add the node from l2 to the merged linked list
+                merged_tail.next = l2
+                # Move to the next node in l2
+                l2 = l2.next
+
+            # Update tail the tail reference to the new last node in the list
+            merged_tail = merged_tail.next
+        
+        # At this point one of the lists has been completely traversed 
+        # so attach the other one to the end of the merged linked list
+        merged_tail.next = l1 or l2
+        
+
+        # Return the head to the merged linked list
+        return merged_head.next
